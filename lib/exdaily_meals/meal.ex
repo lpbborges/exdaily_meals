@@ -3,6 +3,8 @@ defmodule ExdailyMeals.Meal do
 
   import Ecto.Changeset
 
+  alias ExdailyMeals.User
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
@@ -25,5 +27,6 @@ defmodule ExdailyMeals.Meal do
     |> cast(params, @required_params)
     |> validate_required(@required_params)
     |> validate_number(:calories, greater_than: 0)
+    |> foreign_key_constraint(:user_id)
   end
 end
